@@ -9,10 +9,6 @@ class DeviseCreateInstructors < ActiveRecord::Migration[8.0]
       t.string :encrypted_password, null: false
       t.text :introduction, null: false
 
-      ## Recoverable
-      t.string   :reset_password_token
-      t.datetime :reset_password_sent_at
-
       ## Rememberable
       t.datetime :remember_created_at
 
@@ -32,7 +28,6 @@ class DeviseCreateInstructors < ActiveRecord::Migration[8.0]
     end
 
     add_index :instructors, :email,                unique: true
-    add_index :instructors, :reset_password_token, unique: true
     add_index :instructors, :confirmation_token,   unique: true
   end
 end

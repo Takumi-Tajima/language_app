@@ -1,4 +1,5 @@
-$_sidebar-bg: #39425c;
+$_sidebar-administrator-bg: #39425c;
+$_sidebar-instructor-bg: #3cb371;
 
 .sidebar {
   display: flex;
@@ -6,9 +7,16 @@ $_sidebar-bg: #39425c;
   top: 0;
   flex-shrink: 0;
   flex-direction: column;
-  background-color: $_sidebar-bg;
   width: 220px;
   height: 100dvh;
+
+  &.is-administrator {
+    background-color: $_sidebar-administrator-bg;
+  }
+
+  &.is-instructor {
+    background-color: $_sidebar-instructor-bg;
+  }
 }
 
 .sidebar__logo {

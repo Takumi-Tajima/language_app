@@ -33,8 +33,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_17_072731) do
     t.string "email", null: false
     t.string "encrypted_password", null: false
     t.text "introduction", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
     t.integer "sign_in_count", default: 0, null: false
     t.datetime "current_sign_in_at"
@@ -48,6 +46,5 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_17_072731) do
     t.datetime "updated_at", null: false
     t.index ["confirmation_token"], name: "index_instructors_on_confirmation_token", unique: true
     t.index ["email"], name: "index_instructors_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_instructors_on_reset_password_token", unique: true
   end
 end

@@ -2,8 +2,13 @@ ja:
   activerecord:
     models:
       administrator: 管理者
+      instructor: 講師
     attributes:
       administrator:
+        email: メールアドレス
+        password: パスワード
+        remember_me: ログインを記憶する
+      instructor:
         email: メールアドレス
         password: パスワード
         remember_me: ログインを記憶する
