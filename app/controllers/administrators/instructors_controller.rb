@@ -2,7 +2,7 @@ class Administrators::InstructorsController < Administrators::ApplicationControl
   before_action :set_instructor, only: %i[show edit update destroy]
 
   def index
-    @instructors = Instructor.all
+    @instructors = Instructor.default_order
   end
 
   def show
@@ -19,9 +19,9 @@ class Administrators::InstructorsController < Administrators::ApplicationControl
     @instructor = Instructor.new(instructor_params)
 
     if @instructor.save
-      redirect_to administrators_instructor_path(@instructor), notice: '講師を作成しました。'
+      redirect_to administrators_instructors_path, notice: '講師を作成しました。'
     else
-      render :new, status: :unprocessable_entity
+      render :new, status: :unprocessable_content
     end
   end
 
@@ -29,7 +29,7 @@ class Administrators::InstructorsController < Administrators::ApplicationControl
     if @instructor.update(instructor_params)
       redirect_to administrators_instructor_path(@instructor), notice: '講師を更新しました。'
     else
-      render :edit, status: :unprocessable_entity
+      render :edit, status: :unprocessable_content
     end
   end
 
@@ -41,10 +41,10 @@ class Administrators::InstructorsController < Administrators::ApplicationControl
   private
 
   def set_instructor
-    @instructor = Instructor.find(params[:id])
+    @instructor = Instructor.find(params.expect(:id))
   end
 
   def instructor_params
-    params.require(:instructor).permit(:name, :email, :password, :password_confirmation, :introduction)
+    params.expect(instructor: %i[name email password password_confirmation])
   end
 end
