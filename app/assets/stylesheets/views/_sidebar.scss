@@ -1,0 +1,32 @@
+$_sidebar-bg: #39425c;
+
+.sidebar {
+  display: flex;
+  position: sticky;
+  top: 0;
+  flex-shrink: 0;
+  flex-direction: column;
+  background-color: $_sidebar-bg;
+  width: 220px;
+  height: 100dvh;
+}
+
+.sidebar__logo {
+  border-bottom: 1px solid #fff;
+  padding: 20px;
+  color: #fff;
+  font-size: 16px;
+}
+
+.sidebar__list {
+  margin: 0 0 auto;
+  padding: 0;
+  list-style: none;
+}
+
+.sidebar__list-link {
+  display: block;
+  padding: 15px;
+  color: #fff;
+  text-decoration: none;
+}

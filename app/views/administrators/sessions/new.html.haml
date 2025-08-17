@@ -2,4 +2,4 @@
   = f.input :email
   = f.input :password
   = f.input :remember_me, as: :boolean if devise_mapping.rememberable?
-  = f.button :submit
+  = f.button :submit, 'ログイン', class: 'btn-primary'
