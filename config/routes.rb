@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
   namespace :administrators do
     root 'home#index'
+    resources :instructors, only: %i[index show new edit create update destroy]
   end
 
   namespace :instructors do
