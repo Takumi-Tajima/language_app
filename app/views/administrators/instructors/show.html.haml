@@ -38,12 +38,17 @@
               - else
                 %span.badge.bg-warning 未確認
 
-.d-flex.gap-2.mt-4
-  = link_to '編集', edit_administrators_instructor_path(@instructor),
-            class: 'btn btn-primary'
-  = link_to '削除', administrators_instructor_path(@instructor),
-            class: 'btn btn-danger',
-            data: { turbo_method: :delete,
-                    turbo_confirm: '本当に削除しますか？' }
-  = link_to '一覧に戻る', administrators_instructors_path,
-            class: 'btn btn-secondary'
+    .d-flex.gap-2.mt-4
+      = link_to '編集', edit_administrators_instructor_path(@instructor),
+                class: 'btn btn-primary'
+      = link_to '削除', administrators_instructor_path(@instructor),
+                class: 'btn btn-danger',
+                data: { turbo_method: :delete,
+                        turbo_confirm: '本当に削除しますか？' }
+      = link_to '一覧に戻る', administrators_instructors_path,
+                class: 'btn btn-secondary'
+      .ms-auto
+        = button_to 'この講師でログインする',
+                    administrators_instructor_impersonation_path(@instructor),
+                    class: 'btn btn-outline-secondary',
+                    data: { turbo_confirm: 'この講師としてログインしますか？' }

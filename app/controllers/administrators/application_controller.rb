@@ -1,5 +1,4 @@
-class Administrators::ApplicationController < ActionController::Base
+class Administrators::ApplicationController < ApplicationController
   before_action :authenticate_administrator!
-  allow_browser versions: :modern
   layout 'administrators'
 end

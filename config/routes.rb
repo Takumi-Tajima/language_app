@@ -4,7 +4,9 @@ Rails.application.routes.draw do
 
   namespace :administrators do
     root 'home#index'
-    resources :instructors, only: %i[index show new edit create update destroy]
+    resources :instructors, only: %i[index show new edit create update destroy] do
+      resource :impersonation, only: %i[create destroy], module: :instructors
+    end
   end
 
   namespace :instructors do
