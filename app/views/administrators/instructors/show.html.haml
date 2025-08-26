@@ -1,54 +1,46 @@
-%h1.mb-4 講師詳細
+%h1.fs-2.mb-4 講師詳細
 
 .row
   .col-lg-8
     .card
       .card-body
-        %h5.card-title= @instructor.name
-        %p.card-text
+        .fs-5.card-title= @instructor.name
+        .card-text
           %strong メールアドレス:
           = @instructor.email
 
-        %p.card-text
+        .card-text
           %strong 自己紹介:
-        %p.card-text.border.p-3.bg-light= h(@instructor.introduction)
+        .card-text.border.p-3.bg-light= @instructor.introduction
 
         %hr
 
         .row
           .col-md-6
-            %p.mb-1
+            .mb-1
               %strong 登録日:
-              = @instructor.created_at.strftime('%Y年%m月%d日')
+              = l(@instructor.created_at)
           .col-md-6
-            %p.mb-1
+            .mb-1
               %strong 最終ログイン:
-              = @instructor.last_sign_in_at&.strftime('%Y年%m月%d日 %H:%M') || '未ログイン'
+              - if @instructor.last_sign_in_at.present?
+                = l(@instructor.last_sign_in_at)
 
         .row
           .col-md-6
-            %p.mb-1
+            .mb-1
               %strong ログイン回数:
               = @instructor.sign_in_count
           .col-md-6
-            %p.mb-1
+            .mb-1
               %strong アカウント状態:
               - if @instructor.confirmed_at
                 %span.badge.bg-success 確認済み
               - else
                 %span.badge.bg-warning 未確認
 
-    .d-flex.gap-2.mt-4
-      = link_to '編集', edit_administrators_instructor_path(@instructor),
-                class: 'btn btn-primary'
-      = link_to '削除', administrators_instructor_path(@instructor),
-                class: 'btn btn-danger',
-                data: { turbo_method: :delete,
-                        turbo_confirm: '本当に削除しますか？' }
-      = link_to '一覧に戻る', administrators_instructors_path,
-                class: 'btn btn-secondary'
+    .d-flex.gap-2.mt-4.justify-content-between
+      = link_to '編集', edit_administrators_instructor_path(@instructor), class: 'btn btn-primary'
+      = button_to 'この講師でログインする', administrators_instructor_impersonation_path(@instructor), class: 'btn btn-outline-secondary', data: { turbo_confirm: 'この講師としてログインしますか？' }
       .ms-auto
-        = button_to 'この講師でログインする',
-                    administrators_instructor_impersonation_path(@instructor),
-                    class: 'btn btn-outline-secondary',
-                    data: { turbo_confirm: 'この講師としてログインしますか？' }
+        = button_to '削除', administrators_instructor_path(@instructor), method: :delete, data: { turbo_confirm: '本当にこの講師を削除しますか？' }, class: 'btn btn-danger'
