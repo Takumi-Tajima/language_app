@@ -11,6 +11,7 @@ Rails.application.routes.draw do
 
   namespace :instructors do
     root 'home#index'
+    resource :profile, only: %i[show edit update]
   end
 
   get 'up' => 'rails/health#show', as: :rails_health_check

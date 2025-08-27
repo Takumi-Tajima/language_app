@@ -1,0 +1,21 @@
+%h1.fs-2.mb-4 プロフィール
+
+.row.justify-content-center
+  .col-8
+    %table.table
+      %tbody
+        %tr
+          %th 名前
+          %td= current_instructor.name
+        %tr
+          %th メールアドレス
+          %td= current_instructor.email
+        %tr
+          %th 自己紹介
+          %td= current_instructor.introduction
+        %tr
+          %th 教えられる言語
+          %td= current_instructor.teachable_language.join('・')
+
+    .mt-4
+      = link_to 'プロフィール情報の編集', edit_instructors_profile_path, class: 'btn btn-primary'
