@@ -2,8 +2,6 @@
   .sidebar__logo 管理者: Asia Language
   %ul.sidebar__list
     %li.sidebar__list-link
-      = link_to 'ダッシュボード', administrators_root_path, class: 'text-decoration-none text-white'
-    %li.sidebar__list-link
       = link_to '講師管理', administrators_instructors_path, class: 'text-decoration-none text-white'
-    %li.sidebar__list-link
-      = link_to 'ログアウト', destroy_administrator_session_path, method: :delete, class: 'text-decoration-none text-white', data: { confirm: 'ログアウトしますか？' }
+  - if administrator_signed_in?
+    .p-2= button_to 'ログアウト', destroy_administrator_session_path, method: :delete, data: { turbo_confirm: 'ログアウトします、よろしいですか？' }, class: 'btn btn-danger'

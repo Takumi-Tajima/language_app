@@ -27,7 +27,7 @@ class Administrators::InstructorsController < Administrators::ApplicationControl
 
   def update
     if @instructor.update(instructor_params)
-      redirect_to administrators_instructor_path(@instructor), notice: '講師を更新しました。'
+      redirect_to administrators_instructor_path(@instructor), notice: '講師を更新しました。', status: :see_other
     else
       render :edit, status: :unprocessable_content
     end
@@ -35,7 +35,7 @@ class Administrators::InstructorsController < Administrators::ApplicationControl
 
   def destroy
     @instructor.destroy!
-    redirect_to administrators_instructors_path, notice: '講師を削除しました。'
+    redirect_to administrators_instructors_path, notice: '講師を削除しました。', status: :see_other
   end
 
   private

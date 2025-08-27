@@ -1,8 +1,8 @@
 = simple_form_for [:administrators, instructor] do |f|
   .row
-    .col-md-6= f.input :name
-    .col-md-6= f.input :email
+    .col-6= f.input :name
+    .col-6= f.input :email
   .row
-    .col-md-6= f.input :password
-    .col-md-6= f.input :password_confirmation
+    .col-6= f.input :password
+    .col-6= f.input :password_confirmation
   = f.button :submit, class: 'btn-primary'
