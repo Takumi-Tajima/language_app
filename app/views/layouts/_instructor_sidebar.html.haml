@@ -1,6 +1,6 @@
 .sidebar.is-instructor
   .sidebar__logo 講師: Asia Language
-  - if impersonating?
+  - if administrator_signed_in?
     .alert.alert-warning.m-3
       管理者で代理ログイン中
       = button_to 'なりすましログインを終了', administrators_instructor_impersonation_path(current_instructor), method: :delete, data: { turbo_confirm: '管理者に戻ります、よろしいですか？' }, class: 'btn btn-outline-secondary'

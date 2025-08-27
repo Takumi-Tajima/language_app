@@ -1,5 +1,5 @@
 class Instructor < ApplicationRecord
-  devise :database_authenticatable, :registerable, :rememberable, :validatable, :trackable, :confirmable
+  devise :database_authenticatable, :rememberable, :validatable, :trackable, :confirmable
 
   attribute :introduction, :text, default: 'プロフィール準備中'
 

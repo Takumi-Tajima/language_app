@@ -2,7 +2,6 @@ class Administrators::Instructors::ImpersonationsController < Administrators::Ap
   before_action :set_instructor
 
   def create
-    session[:administrator_backup_id] = current_administrator.id
     sign_in @instructor
     redirect_to instructors_root_path, notice: '講師として代理ログインしました。'
   end
