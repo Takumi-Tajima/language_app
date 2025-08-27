@@ -8,3 +8,7 @@
     %li.sidebar__list-link Item1
     %li.sidebar__list-link Item2
     %li.sidebar__list-link Item
+  - if instructor_signed_in?
+    .p-2
+      .mb-2.text-white= current_instructor.email
+      = button_to 'ログアウト', destroy_instructor_session_path, method: :delete, data: { turbo_confirm: 'ログアウトします、よろしいですか？' }, class: 'btn btn-danger'
