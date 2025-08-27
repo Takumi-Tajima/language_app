@@ -1,33 +1,22 @@
-%h1.mb-4 講師一覧
+%h1.fs-2.mb-4 講師一覧
 
-.d-flex.justify-content-end.mb-3
-  = link_to '新しい講師を追加', new_administrators_instructor_path,
-            class: 'btn btn-primary'
+.text-end.mb-3
+  = link_to '新しい講師を追加', new_administrators_instructor_path, class: 'btn btn-primary'
 
 - if @instructors.any?
-  .table-responsive
-    %table.table.table-striped.table-hover
-      %thead.table-dark
+  %table.table.table-hover
+    %thead.table-dark
+      %tr
+        %th 名前
+        %th メールアドレス
+        %th 最終ログイン
+    %tbody
+      - @instructors.each do |instructor|
         %tr
-          %th 名前
-          %th メールアドレス
-          %th 最終ログイン
-          %th.text-center 操作
-      %tbody
-        - @instructors.each do |instructor|
-          %tr
-            %td= instructor.name
-            %td= instructor.email
-            %td= instructor.last_sign_in_at&.strftime('%Y/%m/%d %H:%M')
-            %td.text-center
-              = link_to '詳細', administrators_instructor_path(instructor),
-                        class: 'btn btn-sm btn-outline-primary me-1'
-              = link_to '編集', edit_administrators_instructor_path(instructor),
-                        class: 'btn btn-sm btn-outline-secondary me-1'
-              = link_to '削除', administrators_instructor_path(instructor),
-                        class: 'btn btn-sm btn-outline-danger',
-                        data: { turbo_method: :delete,
-                                turbo_confirm: '本当に削除しますか？' }
+          %td= link_to instructor.name, administrators_instructor_path(instructor)
+          %td= instructor.email
+          %td
+            - if instructor.last_sign_in_at.present?
+              = l(instructor.last_sign_in_at)
 - else
-  .alert.alert-info.text-center
-    %p.mb-0 まだ講師が登録されていません。
+  %p.text-center まだ講師が登録されていません。

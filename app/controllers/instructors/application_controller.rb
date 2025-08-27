@@ -1,5 +1,4 @@
-class Instructors::ApplicationController < ActionController::Base
+class Instructors::ApplicationController < ApplicationController
   before_action :authenticate_instructor!
-  allow_browser versions: :modern
   layout 'instructors'
 end

@@ -9,6 +9,8 @@ ja:
         password: パスワード
         remember_me: ログインを記憶する
       instructor:
+        name: 名前
         email: メールアドレス
         password: パスワード
+        password_confirmation: パスワード（確認用）
         remember_me: ログインを記憶する
