@@ -16,6 +16,6 @@ class Instructors::ProfilesController < Instructors::ApplicationController
   private
 
   def instructor_params
-    params.expect(instructor: %i[name introduction teachable_language])
+    params.expect(instructor: [:name, :introduction, { teachable_language: [] }])
   end
 end

@@ -17,3 +17,11 @@ ja:
         teachable_language: 教えられる言語
         password_confirmation: パスワード（確認用）
         remember_me: ログインを記憶する
+
+  enumerize:
+    instructor:
+      teachable_language:
+        japanese: 日本語
+        english: 英語
+        chinese: 中国語
+        korean: 韓国語

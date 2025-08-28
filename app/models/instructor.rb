@@ -1,4 +1,8 @@
 class Instructor < ApplicationRecord
+  extend Enumerize
+
+  enumerize :teachable_language, in: Language::LANGUAGES, default: :japanese, predicates: true, multiple: true
+
   devise :database_authenticatable, :rememberable, :validatable, :trackable, :confirmable
 
   attribute :introduction, :text, default: 'プロフィール準備中'

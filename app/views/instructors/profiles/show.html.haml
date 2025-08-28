@@ -15,7 +15,7 @@
           %td= current_instructor.introduction
         %tr
           %th 教えられる言語
-          %td= current_instructor.teachable_language.join('・')
+          %td= current_instructor.teachable_language.texts.join('・')
 
     .mt-4
       = link_to 'プロフィール情報の編集', edit_instructors_profile_path, class: 'btn btn-primary'
