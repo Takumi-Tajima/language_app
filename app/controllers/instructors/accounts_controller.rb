@@ -14,6 +14,6 @@ class Instructors::AccountsController < Instructors::ApplicationController
   private
 
   def account_params
-    params.require(:instructor).permit(:email, :password, :password_confirmation, :current_password)
+    params.expect(instructor: %i[email password password_confirmation current_password])
   end
 end
