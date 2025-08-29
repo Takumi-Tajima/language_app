@@ -45,7 +45,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_27_074505) do
     t.string "unconfirmed_email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "teachable_language", null: false, array: true
+    t.string "teachable_language", default: [], null: false, array: true
     t.index ["confirmation_token"], name: "index_instructors_on_confirmation_token", unique: true
     t.index ["email"], name: "index_instructors_on_email", unique: true
   end
