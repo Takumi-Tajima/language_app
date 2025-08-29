@@ -2,7 +2,7 @@ class Instructors::LessonsController < Instructors::ApplicationController
   before_action :set_lesson, only: %i[show edit update destroy]
 
   def index
-    @lessons = current_instructor.lessons
+    @lessons = current_instructor.lessons.default_order
   end
 
   def show

@@ -9,4 +9,6 @@ class Lesson < ApplicationRecord
   validates :language, presence: true
   validates :name, presence: true
   validates :description, presence: true
+
+  scope :default_order, -> { order(id: :desc) }
 end

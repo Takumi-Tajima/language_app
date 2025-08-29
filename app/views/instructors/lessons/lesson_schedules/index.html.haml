@@ -1,0 +1,21 @@
+%h1.fs-2.mb-4 #{@lesson.name}のスケジュール一覧
+
+.row.justify-content-center
+  .col-8
+    = link_to 'スケジュールを新しく登録する', new_instructors_lesson_lesson_schedule_path(@lesson), class: 'btn btn-primary mb-4'
+    %table.table
+      %thead
+        %tr
+          %th ID
+          %th 開始時間
+          %th 終了時間
+          %th 予約状況
+      %tbody
+        - @lesson_schedules.each do |lesson_schedule|
+          %tr
+            %td= link_to lesson_schedule.id, instructors_lesson_lesson_schedule_path(@lesson, lesson_schedule)
+            %td= l(lesson_schedule.start_at)
+            %td= l(lesson_schedule.end_at)
+            %td= lesson_schedule.is_booked ? '予約済み' : '空き'
+
+    .my-5= link_to 'レッスン詳細に戻る', instructors_lesson_path(@lesson)

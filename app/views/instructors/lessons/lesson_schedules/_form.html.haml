@@ -1,0 +1,4 @@
+= simple_form_for [:instructors, lesson, lesson_schedule] do |f|
+  = f.input :start_at, as: :datetime, html5: :true ,hint: 'レッスン時間は50分です。'
+  = f.input :meeting_url
+  = f.button :submit, class: 'btn-primary'

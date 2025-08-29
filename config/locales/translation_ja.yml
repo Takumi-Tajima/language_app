@@ -21,6 +21,11 @@ ja:
         name: レッスン名
         description: レッスン内容
         language: 言語
+      lesson_schedule:
+        start_at: 開始時間
+        end_at: 終了時間
+        meeting_url: ミーティングURL
+        is_booked: 予約状況
 
   enumerize:
     lesson:
