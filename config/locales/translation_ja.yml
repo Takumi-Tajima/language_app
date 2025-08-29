@@ -12,5 +12,16 @@ ja:
         name: 名前
         email: メールアドレス
         password: パスワード
+        current_password: 現在のパスワード
+        introduction: 自己紹介
+        teachable_language: 教えられる言語
         password_confirmation: パスワード（確認用）
         remember_me: ログインを記憶する
+
+  enumerize:
+    instructor:
+      teachable_language:
+        japanese: 日本語
+        english: 英語
+        chinese: 中国語
+        korean: 韓国語
