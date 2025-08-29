@@ -24,14 +24,11 @@ ja:
 
   enumerize:
     lesson:
-      language:
+      language: &languages
         japanese: 日本語
         english: 英語
         chinese: 中国語
         korean: 韓国語
     instructor:
       teachable_language:
-        japanese: 日本語
-        english: 英語
-        chinese: 中国語
-        korean: 韓国語
+        <<: *languages
