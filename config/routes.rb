@@ -1,12 +1,11 @@
 Rails.application.routes.draw do
   devise_for :instructors, controllers: { sessions: 'instructors/sessions' }
+  devise_for :administrators, controllers: { sessions: 'administrators/sessions' }
 
   devise_scope :instructor do
     get 'instructors/edit' => 'instructors/registrations#edit', as: 'edit_instructor_registration'
     put 'instructors' => 'instructors/registrations#update', as: 'instructor_registration'
   end
-
-  devise_for :administrators, controllers: { sessions: 'administrators/sessions' }
 
   namespace :administrators do
     root 'instructors#index'
