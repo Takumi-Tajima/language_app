@@ -7,6 +7,7 @@ class LessonSchedule < ApplicationRecord
   validates :end_at, presence: true
   validates :meeting_url, presence: true
   validates :is_booked, inclusion: { in: [true, false] }
+  validate :validate_no_overlap_lesson_schedules
 
   before_validation :set_end_at
 
@@ -16,5 +17,13 @@ class LessonSchedule < ApplicationRecord
 
   def set_end_at
     self.end_at = start_at + LESSON_DURATION_MINUTES
+  end
+
+  def validate_no_overlap_lesson_schedules
+    overlapping = lesson.instructor.lesson_schedules
+                        .where.not(id:)
+                        .exists?(['start_at < ? AND end_at > ?', end_at, start_at])
+
+    errors.add(:base, '他のレッスンと重複しています') if overlapping.present?
   end
 end
