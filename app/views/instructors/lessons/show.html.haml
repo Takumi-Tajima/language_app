@@ -1,0 +1,16 @@
+%h1.fs-2.mb-4 レッスン詳細
+.row.justify-content-center
+  .col-8
+    %dl.row
+      %dt.col-2 レッスン名
+      %dd.col-10= @lesson.name
+
+      %dt.col-2 言語
+      %dd.col-10= @lesson.language_text
+
+      %dt.col-2 説明
+      %dd.col-10= @lesson.description
+
+    .hstack.justify-content-between
+      = link_to '編集', edit_instructors_lesson_path(@lesson), class: 'btn btn-primary'
+      = button_to '削除', instructors_lesson_path(@lesson), method: :delete, data: { turbo_confirm: '本当に削除しますか？' }, class: 'btn btn-outline-danger'

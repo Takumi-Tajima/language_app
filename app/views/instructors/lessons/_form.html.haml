@@ -1,0 +1,5 @@
+= simple_form_for [:instructors, lesson] do |f|
+  = f.input :language
+  = f.input :name
+  = f.input :description, input_html: { rows: 5 }
+  = f.button :submit, class: 'btn-primary'

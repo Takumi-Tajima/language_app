@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_27_074505) do
+ActiveRecord::Schema[8.0].define(version: 2025_08_29_020925) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -49,4 +49,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_27_074505) do
     t.index ["confirmation_token"], name: "index_instructors_on_confirmation_token", unique: true
     t.index ["email"], name: "index_instructors_on_email", unique: true
   end
+
+  create_table "lessons", force: :cascade do |t|
+    t.bigint "instructor_id", null: false
+    t.string "language", null: false
+    t.string "name", null: false
+    t.text "description", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["instructor_id"], name: "index_lessons_on_instructor_id"
+  end
+
+  add_foreign_key "lessons", "instructors"
 end

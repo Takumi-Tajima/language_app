@@ -1,0 +1,17 @@
+%h1.fs-2.mb-4 レッスン一覧
+
+.row.justify-content-center
+  .col-8
+    = link_to 'レッスンを新しく登録する', new_instructors_lesson_path, class: 'btn btn-primary mb-4'
+    %table.table
+      %thead
+        %tr
+          %th レッスン名
+          %th 言語
+          %th 説明
+      %tbody
+        - @lessons.each do |lesson|
+          %tr
+            %td= link_to lesson.name, instructors_lesson_path(lesson)
+            %td= lesson.language_text
+            %td= truncate(lesson.description)

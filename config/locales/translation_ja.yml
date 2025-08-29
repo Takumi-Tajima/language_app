@@ -17,8 +17,18 @@ ja:
         teachable_language: 教えられる言語
         password_confirmation: パスワード（確認用）
         remember_me: ログインを記憶する
+      lesson:
+        name: レッスン名
+        description: レッスン内容
+        language: 言語
 
   enumerize:
+    lesson:
+      language:
+        japanese: 日本語
+        english: 英語
+        chinese: 中国語
+        korean: 韓国語
     instructor:
       teachable_language:
         japanese: 日本語
