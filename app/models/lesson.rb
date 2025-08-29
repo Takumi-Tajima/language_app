@@ -2,6 +2,7 @@ class Lesson < ApplicationRecord
   extend Enumerize
 
   belongs_to :instructor
+  has_many :lesson_schedules, dependent: :destroy
 
   enumerize :language, in: Language::LANGUAGES, predicates: true
 
