@@ -6,7 +6,6 @@ class LessonSchedule < ApplicationRecord
   validates :start_at, presence: true
   validates :end_at, comparison: { greater_than: :start_at }
   validates :meeting_url, presence: true
-  validates :is_booked, inclusion: { in: [true, false] }
   validate :validate_no_overlap_lesson_schedules
 
   before_validation :set_end_at
