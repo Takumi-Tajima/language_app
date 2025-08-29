@@ -1,5 +1,11 @@
 Rails.application.routes.draw do
   devise_for :instructors, controllers: { sessions: 'instructors/sessions' }
+
+  devise_scope :instructor do
+    get 'instructors/edit' => 'instructors/registrations#edit', as: 'edit_instructor_registration'
+    put 'instructors' => 'instructors/registrations#update', as: 'instructor_registration'
+  end
+
   devise_for :administrators, controllers: { sessions: 'administrators/sessions' }
 
   namespace :administrators do
@@ -12,7 +18,6 @@ Rails.application.routes.draw do
   namespace :instructors do
     root 'home#index'
     resource :profile, only: %i[show edit update]
-    resource :account, only: %i[edit update]
   end
 
   get 'up' => 'rails/health#show', as: :rails_health_check

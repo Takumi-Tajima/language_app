@@ -1,6 +1,4 @@
-%h1.fs-2.mb-4 アカウント設定
-
-= simple_form_for current_instructor, url: instructors_account_path, method: :patch do |f|
+= simple_form_for(current_instructor, url: instructor_registration_path, html: { method: :put }) do |f|
   = f.input :email
   = f.input :current_password
   = f.input :password, label: '新しいパスワード', hint: '変更しない場合は空欄のまま'
