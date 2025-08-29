@@ -20,10 +20,8 @@ class LessonSchedule < ApplicationRecord
   end
 
   def validate_no_overlap_lesson_schedules
-    overlapping = lesson.instructor.lesson_schedules
-                        .where.not(id:)
-                        .exists?(['start_at < ? AND end_at > ?', end_at, start_at])
-
-    errors.add(:base, '他のレッスンと重複しています') if overlapping.present?
+    if lesson.instructor.lesson_schedules.where.not(id:).exists?(['start_at < ? AND end_at > ?', end_at, start_at])
+      errors.add(:base, '他のレッスンと重複しています')
+    end
   end
 end
