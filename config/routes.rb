@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   devise_for :instructors, controllers: { sessions: 'instructors/sessions' }
   devise_for :administrators, controllers: { sessions: 'administrators/sessions' }
 
