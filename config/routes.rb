@@ -15,8 +15,11 @@ Rails.application.routes.draw do
   end
 
   namespace :instructors do
-    root 'home#index'
+    root 'lessons#index'
     resource :profile, only: %i[show edit update]
+    resources :lessons, only: %i[index show new edit create update destroy] do
+      resources :lesson_schedules, only: %i[index show new edit create update destroy], module: :lessons
+    end
   end
 
   get 'up' => 'rails/health#show', as: :rails_health_check

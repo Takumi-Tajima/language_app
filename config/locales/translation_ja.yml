@@ -17,11 +17,23 @@ ja:
         teachable_language: 教えられる言語
         password_confirmation: パスワード（確認用）
         remember_me: ログインを記憶する
+      lesson:
+        name: レッスン名
+        description: レッスン内容
+        language: 言語
+      lesson_schedule:
+        start_at: 開始時間
+        end_at: 終了時間
+        meeting_url: ミーティングURL
+        is_booked: 予約状況
 
   enumerize:
-    instructor:
-      teachable_language:
+    lesson:
+      language: &languages
         japanese: 日本語
         english: 英語
         chinese: 中国語
         korean: 韓国語
+    instructor:
+      teachable_language:
+        <<: *languages
