@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: { registrations: 'users/registrations' }
   devise_for :instructors, controllers: { sessions: 'instructors/sessions' }
   devise_for :administrators, controllers: { sessions: 'administrators/sessions' }
 
@@ -21,6 +21,10 @@ Rails.application.routes.draw do
     resources :lessons, only: %i[index show new edit create update destroy] do
       resources :lesson_schedules, only: %i[index show new edit create update destroy], module: :lessons
     end
+  end
+
+  namespace :users do
+    root 'home#index'
   end
 
   get 'up' => 'rails/health#show', as: :rails_health_check
