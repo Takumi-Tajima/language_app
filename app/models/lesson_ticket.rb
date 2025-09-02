@@ -1,8 +1,8 @@
 class LessonTicket < ApplicationRecord
   TICKET_INFO = {
     single_lesson_pack: { price: 2000, count: 1 },
-    three_lesson_pack: { price: 5000, count: 2 },
-    five_lesson_pack: { price: 7500, count: 3 },
+    three_lesson_pack: { price: 5000, count: 3 },
+    five_lesson_pack: { price: 7500, count: 5 },
   }.freeze
 
   extend Enumerize
