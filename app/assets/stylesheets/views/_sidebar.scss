@@ -1,5 +1,6 @@
 $_sidebar-administrator-bg: #39425c;
 $_sidebar-instructor-bg: #3cb371;
+$_sidebar-user-bg: #f1b034;
 
 .sidebar {
   display: flex;
@@ -16,6 +17,10 @@ $_sidebar-instructor-bg: #3cb371;
 
   &.is-instructor {
     background-color: $_sidebar-instructor-bg;
+  }
+
+  &.is-user {
+    background-color: $_sidebar-user-bg;
   }
 }
 
