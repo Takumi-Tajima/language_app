@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_08_29_073507) do
+ActiveRecord::Schema[8.0].define(version: 2025_09_02_083527) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -61,6 +61,18 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_29_073507) do
     t.index ["lesson_id"], name: "index_lesson_schedules_on_lesson_id"
   end
 
+  create_table "lesson_tickets", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "purchase_id", null: false
+    t.string "ticket_type", null: false
+    t.integer "remaining_count", null: false
+    t.integer "price", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["purchase_id"], name: "index_lesson_tickets_on_purchase_id"
+    t.index ["user_id"], name: "index_lesson_tickets_on_user_id"
+  end
+
   create_table "lessons", force: :cascade do |t|
     t.bigint "instructor_id", null: false
     t.string "language", null: false
@@ -69,6 +81,18 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_29_073507) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["instructor_id"], name: "index_lessons_on_instructor_id"
+  end
+
+  create_table "purchases", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.datetime "purchased_at", null: false
+    t.integer "total_amount", null: false
+    t.integer "tax_amount", null: false
+    t.integer "subtotal", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "ticket_type", null: false
+    t.index ["user_id"], name: "index_purchases_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -95,5 +119,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_08_29_073507) do
   end
 
   add_foreign_key "lesson_schedules", "lessons"
+  add_foreign_key "lesson_tickets", "purchases"
+  add_foreign_key "lesson_tickets", "users"
   add_foreign_key "lessons", "instructors"
+  add_foreign_key "purchases", "users"
 end

@@ -25,6 +25,12 @@ Rails.application.routes.draw do
 
   namespace :users do
     root 'home#index'
+    resources :purchases, only: %i[show new]
+    resources :stripe_checkouts, only: %i[create] do
+      collection do
+        get 'success'
+      end
+    end
   end
 
   get 'up' => 'rails/health#show', as: :rails_health_check

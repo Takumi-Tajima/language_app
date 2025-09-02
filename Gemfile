@@ -13,6 +13,7 @@ gem 'propshaft'
 gem 'puma'
 gem 'simple_form'
 gem 'stimulus-rails'
+gem 'stripe'
 gem 'turbo-rails'
 
 group :development, :test do
