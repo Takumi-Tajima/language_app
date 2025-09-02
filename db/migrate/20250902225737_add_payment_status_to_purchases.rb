@@ -1,5 +1,5 @@
 class AddPaymentStatusToPurchases < ActiveRecord::Migration[8.0]
   def change
-    add_column :purchases, :is_paid, :boolean, default: false, null: false
+    add_column :purchases, :paid_at, :datetime
   end
 end

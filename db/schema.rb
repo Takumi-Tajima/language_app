@@ -92,7 +92,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_02_225737) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "ticket_type", null: false
-    t.boolean "is_paid", default: false, null: false
+    t.datetime "paid_at"
     t.index ["user_id"], name: "index_purchases_on_user_id"
   end
 
