@@ -2,6 +2,7 @@
   .sidebar__logo Asia Language
   %ul.sidebar__list
     %li= link_to 'レッスン一覧', users_root_path, class: 'sidebar__list-link'
+    %li= link_to 'チケット購入', new_users_purchase_path, class: 'sidebar__list-link'
   - if user_signed_in?
     .p-2
       .mb-3= link_to current_user.email, edit_user_registration_path

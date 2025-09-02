@@ -25,6 +25,7 @@ Rails.application.routes.draw do
 
   namespace :users do
     root 'home#index'
+    resources :purchases, only: %i[index show new create]
   end
 
   get 'up' => 'rails/health#show', as: :rails_health_check
