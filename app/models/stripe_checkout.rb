@@ -5,7 +5,7 @@ class StripeCheckout
     price = TaxRate.calculate_total_amount(ticket_info[:price]).to_i
 
     ::Stripe::Checkout::Session.create(
-      success_url: 'http://localhost:3000/users/purchases?session_id={CHECKOUT_SESSION_ID}',
+      success_url: 'http://localhost:3000/users/stripe_checkouts/success?session_id={CHECKOUT_SESSION_ID}',
       cancel_url: 'http://localhost:3000/users/purchases',
       mode: 'payment',
       line_items: [
@@ -24,5 +24,9 @@ class StripeCheckout
         ticket_type: ticket_type,
       }
     )
+  end
+
+  def self.retrieve_session(session_id)
+    ::Stripe::Checkout::Session.retrieve(session_id)
   end
 end
