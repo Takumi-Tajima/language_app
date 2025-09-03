@@ -16,8 +16,11 @@ class LessonTicket < ApplicationRecord
 
   enumerize :ticket_type, in: TICKET_TYPES, predicates: true
 
-  validates :remaining_count, inclusion: { in: TICKET_COUNTS }
-  validates :price, inclusion: { in: TICKET_PRICES }
+  validates :remaining_count, presence: true
+  validates :price, presence: true
+
+  before_validation :set_remaining_count
+  before_validation :set_price
 
   private
 
