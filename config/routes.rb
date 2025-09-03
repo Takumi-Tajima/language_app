@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     resources :instructors, only: %i[index show new edit create update destroy] do
       resource :impersonation, only: %i[create destroy], module: :instructors
     end
+    resources :purchases, only: %i[index show update]
   end
 
   namespace :instructors do

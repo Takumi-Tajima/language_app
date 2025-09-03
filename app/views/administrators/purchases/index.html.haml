@@ -1,0 +1,21 @@
+%h1.fs-2.mb-4 購入履歴一覧
+.row.justify-content-center
+  .col-8
+    %table.table
+      %thead
+        %tr
+          %th ユーザー
+          %th チケット種別
+          %th 購入日時
+          %th 合計金額
+          %th 支払日時
+      %tbody
+        - @purchases.each do |purchase|
+          %tr
+            %td= link_to purchase.user.email, administrators_purchase_path(purchase)
+            %td= purchase.ticket_type.text
+            %td= l(purchase.created_at)
+            %td= number_to_currency(purchase.total_amount, unit: t('number.currency.tax_included_format.unit'))
+            %td
+              -if purchase.paid?
+                = l(purchase.paid_at)
