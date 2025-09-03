@@ -1,0 +1,17 @@
+%h1.fs-2.mb-4 所有チケット一覧
+.row.justify-content-center
+  .col-8
+    %table.table
+      %thead
+        %tr
+          %th ID
+          %th チケット種別
+          %th 残りの利用回数
+          %th 値段
+      %tbody
+        - @lesson_tickets.each do |lesson_ticket|
+          %tr
+            %td= lesson_ticket.id
+            %td= lesson_ticket.ticket_type_text
+            %td= lesson_ticket.remaining_count
+            %td= number_to_currency(lesson_ticket.price, unit: t('number.currency.tax_included_format.unit'))
