@@ -9,8 +9,12 @@ class Administrators::PurchasesController < Administrators::ApplicationControlle
   end
 
   def update
-    @purchase.paid! unless @purchase.paid?
-    redirect_to administrators_purchase_path(@purchase), notice: '支払いステータスを変更しました。'
+    if @purchase.paid!
+      PurchaseMailer.payment_confirmed_email(@purchase, @purchase.user).deliver_later
+      redirect_to administrators_purchase_path(@purchase), notice: '支払いステータスを変更しました。'
+    else
+      redirect_to administrators_purchase_path(@purchase), alert: 'すでに支払い確認済みです。'
+    end
   end
 
   private

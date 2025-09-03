@@ -16,6 +16,8 @@ class Purchase < ApplicationRecord
   scope :unpaid, -> { where(paid_at: nil) }
 
   def paid!
+    return false if paid?
+
     update!(paid_at: Time.current)
   end
 
