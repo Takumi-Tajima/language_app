@@ -1,4 +1,8 @@
 class Users::PurchasesController < ApplicationController
+  def index
+    @purchases = current_user.purchases.default_order
+  end
+
   def show
     @purchase = current_user.purchases.find(params.expect(:id))
   end

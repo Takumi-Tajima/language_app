@@ -41,7 +41,10 @@ ja:
       teachable_language:
         <<: *languages
     lesson_ticket:
-      ticket_type:
+      ticket_type: &ticket_types
         single_lesson_pack: 単発レッスンパック
         three_lesson_pack: 3回レッスンパック
         five_lesson_pack: 5回レッスンパック
+    purchase:
+      ticket_type:
+        <<: *ticket_types
