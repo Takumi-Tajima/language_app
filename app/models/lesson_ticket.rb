@@ -5,18 +5,19 @@ class LessonTicket < ApplicationRecord
     five_lesson_pack: { price: 7500, count: 5 },
   }.freeze
 
+  TICKET_TYPES = TICKET_INFO.keys.freeze
+  TICKET_COUNTS = TICKET_INFO.values.map { it[:count] }.freeze
+  TICKET_PRICES = TICKET_INFO.values.map { it[:price] }.freeze
+
   extend Enumerize
 
   belongs_to :user
   belongs_to :purchase
 
-  enumerize :ticket_type, in: TICKET_INFO.keys, predicates: true
+  enumerize :ticket_type, in: TICKET_TYPES, predicates: true
 
-  validates :remaining_count, inclusion: { in: TICKET_INFO.values.map { it[:count] } }
-  validates :price, inclusion: { in: TICKET_INFO.values.map { it[:price] } }
-
-  before_validation :set_remaining_count
-  before_validation :set_price
+  validates :remaining_count, inclusion: { in: TICKET_COUNTS }
+  validates :price, inclusion: { in: TICKET_PRICES }
 
   private
 
