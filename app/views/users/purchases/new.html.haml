@@ -1,1 +1,10 @@
 %h1.fs-2.mb-4 チケット購入
+
+.row.g-3
+  - LessonTicket::TICKET_INFO.each do |ticket_type, ticket_info|
+    .col-12.col-md-4
+      .card
+        .card-body.text-center
+          %h2.fs-4.card-title #{ticket_info[:count]}回チケット
+          %p.card-text.fs-3= number_to_currency(ticket_info[:price])
+          = button_to '購入する', users_purchases_path, class: 'btn btn-primary', params: { ticket_type: ticket_type }, data: { turbo_confirm: 'このチケットの購入手続きに移ります。よろしいですか？' }

@@ -5,7 +5,7 @@ class LessonTicket < ApplicationRecord
     five_lesson_pack: { price: 7500, count: 5 },
   }.freeze
 
-  TICKET_TYPES = TICKET_INFO.keys.freeze
+  TICKET_TYPES = TICKET_INFO.keys.map(&:to_s).freeze
   TICKET_COUNTS = TICKET_INFO.values.map { it[:count] }.freeze
   TICKET_PRICES = TICKET_INFO.values.map { it[:price] }.freeze
 

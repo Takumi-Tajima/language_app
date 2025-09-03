@@ -85,7 +85,6 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_02_225737) do
 
   create_table "purchases", force: :cascade do |t|
     t.bigint "user_id", null: false
-    t.datetime "purchased_at", null: false
     t.integer "total_amount", null: false
     t.integer "tax_amount", null: false
     t.integer "subtotal", null: false
