@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     resources :instructors, only: %i[index show new edit create update destroy] do
       resource :impersonation, only: %i[create destroy], module: :instructors
     end
+    resources :purchases, only: %i[index show update]
   end
 
   namespace :instructors do
@@ -25,6 +26,7 @@ Rails.application.routes.draw do
 
   namespace :users do
     root 'home#index'
+    resources :purchases, only: %i[index show new create]
   end
 
   get 'up' => 'rails/health#show', as: :rails_health_check
