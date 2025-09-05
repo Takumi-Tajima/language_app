@@ -8,6 +8,21 @@ class Booking < ApplicationRecord
 
   scope :default_order, -> { order(:id) }
 
+  delegate :start_at, to: :lesson_schedule
+  delegate :end_at, to: :lesson_schedule
+
+  def lesson_name
+    lesson_schedule.lesson.name
+  end
+
+  def lesson_language
+    lesson_schedule.lesson.language_text
+  end
+
+  def instructor_name
+    lesson_schedule.lesson.instructor.name
+  end
+
   def self.create_with_ticket_decrement!(user:, lesson_schedule:)
     ticket = user.available_lesson_ticket
 
@@ -23,7 +38,8 @@ class Booking < ApplicationRecord
   private
 
   def validate_no_overlap_other_bookings
-    if user.bookings.where.not(id:).joins(:lesson_schedule).exists?(['lesson_schedules.start_at < ? AND lesson_schedules.end_at > ?', lesson_schedule.end_at, lesson_schedule.start_at])
+    if user.bookings.where.not(id:).joins(:lesson_schedule).exists?(['lesson_schedules.start_at < ? AND lesson_schedules.end_at > ?', lesson_schedule.end_at,
+                                                                     lesson_schedule.start_at])
       errors.add(:base, '他の予約と時間が重複しています')
     end
   end

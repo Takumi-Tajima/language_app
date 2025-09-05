@@ -5,12 +5,14 @@
     %tr
       %th レッスン名
       %th 言語
+      %th 講師
       %th 開始時間
       %th 終了時間
   %tbody
     - @bookings.each do |booking|
       %tr
-        %td= link_to booking.lesson_schedule.lesson.name, users_booking_path(booking)
-        %td= booking.lesson_schedule.lesson.language_text
-        %td= l(booking.lesson_schedule.start_at)
-        %td= l(booking.lesson_schedule.end_at)
+        %td= link_to booking.lesson_name, users_booking_path(booking)
+        %td= booking.lesson_language
+        %td= booking.instructor_name
+        %td= l(booking.start_at)
+        %td= l(booking.end_at)
