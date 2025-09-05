@@ -2,7 +2,8 @@ class LessonsController < ApplicationController
   before_action :set_lesson, only: [:show]
 
   def index
-    @lessons = Lesson.default_order
+    @q = Lesson.ransack(params[:q])
+    @lessons = @q.result(distinct: true).default_order
   end
 
   def show

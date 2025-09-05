@@ -1,5 +1,9 @@
 %h1.fs-2.mb-4 レッスン一覧
 
+= simple_form_for(@q, url: lessons_path, method: :get) do |f|
+  = f.input :language_eq, collection: Lesson.language.options, include_blank: '全ての言語', label: '言語'
+  = f.button :submit, '検索', class: 'btn-primary'
+
 .row
   - @lessons.each do |lesson|
     .col-md-3.mb-4
