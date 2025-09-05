@@ -3,7 +3,7 @@ class Users::BookingsController < Users::ApplicationController
   before_action :set_booking, only: %i[show]
 
   def index
-    @bookings = current_user.bookings.default_order
+    @bookings = current_user.bookings.includes(lesson_schedule: :lesson).default_order
   end
 
   def show

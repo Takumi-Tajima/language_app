@@ -4,7 +4,7 @@ class Booking < ApplicationRecord
   belongs_to :lesson_ticket
 
   validates :user_id, uniqueness: { scope: :lesson_schedule_id }
-  validate :validate_lesson_ticket_remaining_count
+  validate :validate_no_overlap_other_bookings
 
   scope :default_order, -> { order(:id) }
 
@@ -22,9 +22,9 @@ class Booking < ApplicationRecord
 
   private
 
-  def validate_lesson_ticket_remaining_count
-    if lesson_ticket.remaining_count <= 0
-      errors.add(:lesson_ticket, '利用可能なレッスンチケットがありません')
+  def validate_no_overlap_other_bookings
+    if user.bookings.where.not(id:).joins(:lesson_schedule).exists?(['lesson_schedules.start_at < ? AND lesson_schedules.end_at > ?', lesson_schedule.end_at, lesson_schedule.start_at])
+      errors.add(:base, '他の予約と時間が重複しています')
     end
   end
 end
