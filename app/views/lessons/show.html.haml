@@ -7,3 +7,19 @@
         %dd.col-9.p-1= @lesson.language_text
         %dt.col-3 レッスン詳細
         %dd.col-9.p-1= @lesson.description
+
+  .col-8.mt-3
+    %h2.fs-4 レッスン日時
+    %table.table
+      %thead.table-dark
+        %tr
+          %th 開始日時
+          %th 終了日時
+          %th
+      %tbody
+        - @lesson.lesson_schedules.bookable.each do |lesson_schedule|
+          %tr
+            %td= l(lesson_schedule.start_at, format: :short)
+            %td= l(lesson_schedule.end_at, format: :short)
+            -# TODO: 予約機能実装時にパスを変更
+            %td= button_to '予約する', root_path, method: :post, data: { turbo_confirm: '予約をします。よろしいですか？' }, class: 'btn btn-primary btn-sm'

@@ -11,6 +11,7 @@ class LessonSchedule < ApplicationRecord
   before_validation :set_end_at
 
   scope :default_order, -> { order(:start_at) }
+  scope :bookable, -> { where(is_booked: false).where('start_at > ?', Time.current) }
 
   private
 
