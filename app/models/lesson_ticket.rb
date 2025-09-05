@@ -22,6 +22,8 @@ class LessonTicket < ApplicationRecord
   before_validation :set_remaining_count
   before_validation :set_price
 
+  scope :default_order, -> { order(:id) }
+
   private
 
   def set_remaining_count
