@@ -11,4 +11,12 @@ class Lesson < ApplicationRecord
   validates :description, presence: true
 
   scope :default_order, -> { order(id: :desc) }
+
+  def self.ransackable_attributes(auth_object = nil)
+    %w[language]
+  end
+
+  def self.ransackable_associations(auth_object = nil)
+    %w[lesson_schedules]
+  end
 end
