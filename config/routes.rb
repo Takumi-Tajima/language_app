@@ -30,6 +30,10 @@ Rails.application.routes.draw do
     resources :lesson_tickets, only: %i[index]
   end
 
+  resources :lessons, only: %i[index show]
+
+  root 'lessons#index'
+
   get 'up' => 'rails/health#show', as: :rails_health_check
   mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
 end

@@ -1,0 +1,11 @@
+%h1.fs-2.mb-4 レッスン一覧
+
+.row
+  - @lessons.each do |lesson|
+    .col-md-3.mb-4
+      .card.is-lesson
+        = link_to lesson_path(lesson), class: 'text-decoration-none text-body' do
+          .card-body
+            %h2.card-title.fs-4= lesson.name
+            %p.card-text= truncate(lesson.description, length: 30)
+            .card-text= lesson.language_text
