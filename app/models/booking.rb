@@ -8,6 +8,18 @@ class Booking < ApplicationRecord
 
   scope :default_order, -> { order(:id) }
 
+  def self.create_with_ticket_decrement!(user:, lesson_schedule:)
+    ticket = user.available_lesson_ticket
+
+    transaction do
+      raise ActiveRecord::RecordNotFound, '予約に失敗しました。保有しているチケットの内容をご確認いただくか、他のレッスン予約状況をご確認ください。' if ticket.nil?
+
+      booking = user.bookings.create!(lesson_schedule: lesson_schedule, lesson_ticket: ticket)
+      ticket.decrement_remaining_count!
+      booking
+    end
+  end
+
   private
 
   def validate_lesson_ticket_remaining_count

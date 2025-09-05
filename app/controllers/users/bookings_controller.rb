@@ -10,20 +10,10 @@ class Users::BookingsController < Users::ApplicationController
   end
 
   def create
-    ticket = current_user.available_lesson_ticket
-
-    if ticket.nil?
-      redirect_to lesson_path(@lesson_schedule.lesson), alert: '利用可能なレッスンチケットがありません。レッスンチケットを購入してください。' and return
-    end
-
-    @booking = current_user.bookings.build(lesson_schedule: @lesson_schedule, lesson_ticket: ticket)
-
-    if @booking.save
-      ticket.decrement_remaining_count!
-      redirect_to users_bookings_path, notice: 'レッスンを予約しました'
-    else
-      redirect_to lesson_path(@lesson_schedule.lesson), alert: 'レッスンの予約に失敗しました。チケットを確認するか、他のレッスンとの予約が重複していないか確認してください。'
-    end
+    @booking = Booking.create_with_ticket_decrement!(user: current_user, lesson_schedule: @lesson_schedule)
+    redirect_to users_bookings_path, notice: 'レッスンを予約しました'
+  rescue ActiveRecord::RecordInvalid, ActiveRecord::RecordNotFound => e
+    redirect_to lesson_path(@lesson_schedule.lesson), alert: e.message
   end
 
   def destroy
