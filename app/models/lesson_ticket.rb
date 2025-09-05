@@ -19,10 +19,16 @@ class LessonTicket < ApplicationRecord
   validates :remaining_count, presence: true
   validates :price, presence: true
 
-  before_validation :set_remaining_count
+  before_validation :set_remaining_count, on: :create
   before_validation :set_price
 
   scope :default_order, -> { order(:id) }
+  scope :available, -> { where('remaining_count > ?', 0) }
+  scope :by_oldest, -> { order(:created_at) }
+
+  def decrement_remaining_count!
+    update!(remaining_count: remaining_count - 1)
+  end
 
   private
 

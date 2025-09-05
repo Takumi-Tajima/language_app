@@ -19,4 +19,8 @@ class User < ApplicationRecord
       subtotal: subtotal
     )
   end
+
+  def available_lesson_ticket
+    lesson_tickets.available.by_oldest.first
+  end
 end
