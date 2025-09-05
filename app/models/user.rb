@@ -3,6 +3,7 @@ class User < ApplicationRecord
 
   has_many :purchases, dependent: :destroy
   has_many :lesson_tickets, dependent: :destroy
+  has_many :bookings, dependent: :destroy
 
   def create_purchase!(ticket_type)
     ticket_price = LessonTicket::TICKET_INFO[ticket_type.to_sym][:price]

@@ -2,6 +2,7 @@ class Purchase < ApplicationRecord
   extend Enumerize
 
   belongs_to :user
+  has_many :lesson_tickets, dependent: :destroy
 
   enumerize :ticket_type, in: LessonTicket::TICKET_TYPES, predicates: true
 
