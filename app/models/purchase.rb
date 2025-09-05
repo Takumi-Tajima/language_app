@@ -9,7 +9,7 @@ class Purchase < ApplicationRecord
   validates :tax_amount, presence: true, numericality: { only_integer: true }
   validates :subtotal, presence: true, numericality: { only_integer: true, greater_than: 0 }
 
-  after_update :create_lesson_ticket, if: :should_create_lesson_ticket?
+  after_update :create_lesson_ticket, if: :changed_from_unpaid_to_paid?
 
   scope :default_order, -> { order(created_at: :desc) }
   scope :paid, -> { where.not(paid_at: nil) }
@@ -27,7 +27,7 @@ class Purchase < ApplicationRecord
 
   private
 
-  def should_create_lesson_ticket?
+  def changed_from_unpaid_to_paid?
     saved_change_to_paid_at? && paid?
   end
 
