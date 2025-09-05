@@ -13,6 +13,10 @@ class LessonSchedule < ApplicationRecord
   scope :default_order, -> { order(:start_at) }
   scope :bookable, -> { where(is_booked: false).where('start_at > ?', Time.current) }
 
+  def self.ransackable_attributes(auth_object = nil)
+    %w[start_at end_at]
+  end
+
   private
 
   def set_end_at
