@@ -26,10 +26,10 @@ Rails.application.routes.draw do
   end
 
   namespace :users do
-    root 'home#index'
     resources :purchases, only: %i[index show new create]
     resources :lesson_tickets, only: %i[index]
     resources :bookings, only: %i[index show create destroy]
+    resources :booking_histories, only: %i[index]
   end
 
   resources :lessons, only: %i[index show]

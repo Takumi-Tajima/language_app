@@ -7,6 +7,8 @@ class Booking < ApplicationRecord
   validate :validate_no_overlap_other_bookings
 
   scope :default_order, -> { order(:id) }
+  scope :upcomings, -> { joins(:lesson_schedule).where('lesson_schedules.end_at >= ?', Time.current) }
+  scope :histories, -> { joins(:lesson_schedule).where('lesson_schedules.end_at < ?', Time.current) }
 
   delegate :start_at, to: :lesson_schedule
   delegate :end_at, to: :lesson_schedule
