@@ -17,6 +17,10 @@ class LessonSchedule < ApplicationRecord
     %w[start_at end_at]
   end
 
+  def book!
+    update!(is_booked: true)
+  end
+
   private
 
   def set_end_at

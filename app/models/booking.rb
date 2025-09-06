@@ -31,6 +31,7 @@ class Booking < ApplicationRecord
 
       booking = user.bookings.create!(lesson_schedule: lesson_schedule, lesson_ticket: ticket)
       ticket.decrement_remaining_count!
+      lesson_schedule.book!
       booking
     end
   end
