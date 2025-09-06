@@ -6,6 +6,7 @@
       = button_to 'なりすましログインを終了', administrators_instructor_impersonation_path(current_instructor), method: :delete, data: { turbo_confirm: '管理者に戻ります、よろしいですか？' }, class: 'btn btn-outline-secondary'
   %ul.sidebar__list
     %li= link_to 'レッスン一覧', instructors_lessons_path, class: 'sidebar__list-link'
+    %li= link_to '予約済みレッスン', instructors_booked_lesson_schedules_path, class: 'sidebar__list-link'
   - if instructor_signed_in?
     .p-2
       .mb-3= link_to current_instructor.email, instructors_profile_path

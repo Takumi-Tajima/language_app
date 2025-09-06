@@ -22,6 +22,7 @@ Rails.application.routes.draw do
     resources :lessons, only: %i[index show new edit create update destroy] do
       resources :lesson_schedules, only: %i[index show new edit create update destroy], module: :lessons
     end
+    resources :booked_lesson_schedules, only: %i[index]
   end
 
   namespace :users do

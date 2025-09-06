@@ -14,6 +14,12 @@
       %dt.col-2 予約状況
       %dd.col-10= @lesson_schedule.is_booked ? '予約済み' : '空き'
 
+      %dt.col-2 予約ユーザー名
+      %dd.col-10= @lesson_schedule.is_booked ? @lesson_schedule.booking.user.name : ''
+
+      %dt.col-2 予約ユーザーメール
+      %dd.col-10= @lesson_schedule.is_booked ? @lesson_schedule.booking.user.email : ''
+
     .hstack.justify-content-between
       = link_to '編集', edit_instructors_lesson_lesson_schedule_path(@lesson, @lesson_schedule), class: 'btn btn-primary'
       = button_to '削除', instructors_lesson_lesson_schedule_path(@lesson, @lesson_schedule), method: :delete, data: { turbo_confirm: '本当に削除しますか？' }, class: 'btn btn-outline-danger'
