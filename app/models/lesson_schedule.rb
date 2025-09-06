@@ -2,6 +2,7 @@ class LessonSchedule < ApplicationRecord
   LESSON_DURATION_MINUTES = 50.minutes
 
   belongs_to :lesson
+  has_one :booking, dependent: :destroy
 
   validates :start_at, presence: true
   validates :end_at, comparison: { greater_than: :start_at }
@@ -12,9 +13,18 @@ class LessonSchedule < ApplicationRecord
 
   scope :default_order, -> { order(:start_at) }
   scope :bookable, -> { where(is_booked: false).where('start_at > ?', Time.current) }
+  scope :booked, -> { where(is_booked: true) }
 
   def self.ransackable_attributes(auth_object = nil)
     %w[start_at end_at]
+  end
+
+  def book!
+    update!(is_booked: true)
+  end
+
+  def unbook!
+    update!(is_booked: false)
   end
 
   private

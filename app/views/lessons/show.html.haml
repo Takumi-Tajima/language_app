@@ -21,5 +21,8 @@
           %tr
             %td= l(lesson_schedule.start_at, format: :short)
             %td= l(lesson_schedule.end_at, format: :short)
-            -# TODO: 予約機能実装時にパスを変更
-            %td= button_to '予約する', root_path, method: :post, data: { turbo_confirm: '予約をします。よろしいですか？' }, class: 'btn btn-primary btn-sm'
+            %td= button_to '予約する', users_bookings_path,
+                                      params: { lesson_schedule_id: lesson_schedule.id },
+                                      method: :post,
+                                      data: { turbo_confirm: '予約をします。よろしいですか？' },
+                                      class: 'btn btn-primary btn-sm'

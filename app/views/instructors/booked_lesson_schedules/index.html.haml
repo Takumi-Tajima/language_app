@@ -1,0 +1,17 @@
+%h1.fs-2.mb-4 予約済みのレッスンスケジュール
+.row.justify-content-center
+  .col-8
+    %table.table
+      %thead
+        %tr
+          %th レッスン名
+          %th 言語
+          %th 開始時間
+          %th 終了時間
+      %tbody
+        - @booked_lesson_schedules.each do |lesson_schedule|
+          %tr
+            %td= link_to lesson_schedule.lesson.name, instructors_lesson_lesson_schedule_path(lesson_schedule.lesson, lesson_schedule)
+            %td= lesson_schedule.lesson.language_text
+            %td= l(lesson_schedule.start_at)
+            %td= l(lesson_schedule.end_at)
