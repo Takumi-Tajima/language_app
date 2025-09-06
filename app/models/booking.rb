@@ -26,6 +26,7 @@ class Booking < ApplicationRecord
   def cancel!
     transaction do
       lesson_schedule.unbook!
+      lesson_ticket.increment_remaining_count!
       destroy!
     end
   end

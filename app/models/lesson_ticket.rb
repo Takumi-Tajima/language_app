@@ -31,6 +31,10 @@ class LessonTicket < ApplicationRecord
     update!(remaining_count: remaining_count - 1)
   end
 
+  def increment_remaining_count!
+    update!(remaining_count: remaining_count + 1)
+  end
+
   private
 
   def set_remaining_count
