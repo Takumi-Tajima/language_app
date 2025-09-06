@@ -1,6 +1,6 @@
 class Users::BookingsController < Users::ApplicationController
   before_action :set_lesson_schedule, only: %i[create]
-  before_action :set_booking, only: %i[show]
+  before_action :set_booking, only: %i[show destroy]
 
   def index
     @bookings = current_user.bookings.includes(lesson_schedule: { lesson: :instructor }).default_order
@@ -19,6 +19,8 @@ class Users::BookingsController < Users::ApplicationController
   end
 
   def destroy
+    @booking.cancel!
+    redirect_to users_bookings_path, notice: 'レッスンの予約をキャンセルしました'
   end
 
   private

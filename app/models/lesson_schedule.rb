@@ -23,6 +23,10 @@ class LessonSchedule < ApplicationRecord
     update!(is_booked: true)
   end
 
+  def unbook!
+    update!(is_booked: false)
+  end
+
   private
 
   def set_end_at

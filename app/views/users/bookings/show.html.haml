@@ -20,4 +20,4 @@
       %dt.col-2 ミーティングURL
       %dd.col-10= @booking.lesson_schedule.meeting_url
 
-    = button_to '予約をキャンセルする', users_booking_path(@booking), method: :delete, data: { turbo_confirm: '本当にキャンセルしますか？' }, class: 'btn btn-outline-danger mt-3'
+    = button_to '予約をキャンセルする', users_booking_path(@booking), method: :delete, data: { turbo_confirm: 'チケットのカウントは戻りません。本当にキャンセルしますか？' }, class: 'btn btn-outline-danger mt-3'

@@ -13,6 +13,7 @@ class LessonTicket < ApplicationRecord
 
   belongs_to :user
   belongs_to :purchase
+  has_many :lesson_tickets, dependent: :destroy
 
   enumerize :ticket_type, in: TICKET_TYPES, predicates: true
 

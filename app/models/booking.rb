@@ -23,6 +23,13 @@ class Booking < ApplicationRecord
     lesson_schedule.lesson.instructor.name
   end
 
+  def cancel!
+    transaction do
+      lesson_schedule.unbook!
+      destroy!
+    end
+  end
+
   def self.create_with_ticket_decrement!(user:, lesson_schedule:)
     ticket = user.available_lesson_ticket
 
