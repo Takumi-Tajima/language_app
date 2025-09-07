@@ -1,4 +1,4 @@
-class Users::PurchasesController < ApplicationController
+class Users::PurchasesController < Users::ApplicationController
   before_action :set_purchase, only: %i[show]
 
   def index

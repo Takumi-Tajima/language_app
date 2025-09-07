@@ -11,7 +11,7 @@ class Administrators::PurchasesController < Administrators::ApplicationControlle
   def update
     if @purchase.paid!
       PurchaseMailer.payment_confirmed_email(@purchase, @purchase.user).deliver_later
-      redirect_to administrators_purchase_path(@purchase), notice: '支払いステータスを変更しました。'
+      redirect_to administrators_purchase_path(@purchase), notice: '支払いステータスを変更しました。', status: :see_other
     else
       redirect_to administrators_purchase_path(@purchase), alert: 'すでに支払い確認済みです。'
     end
