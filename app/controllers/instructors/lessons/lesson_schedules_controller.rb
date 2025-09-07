@@ -35,8 +35,11 @@ class Instructors::Lessons::LessonSchedulesController < Instructors::Application
   end
 
   def destroy
-    @lesson_schedule.destroy!
-    redirect_to instructors_lesson_lesson_schedules_path(@lesson), notice: 'スケジュールを削除しました。', status: :see_other
+    if @lesson_schedule.destroy
+      redirect_to instructors_lesson_lesson_schedules_path(@lesson), notice: 'スケジュールを削除しました。', status: :see_other
+    else
+      redirect_to instructors_lesson_lesson_schedules_path(@lesson), alert: '削除に失敗しました。', status: :see_other
+    end
   end
 
   private

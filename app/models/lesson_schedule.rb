@@ -10,6 +10,7 @@ class LessonSchedule < ApplicationRecord
   validate :validate_no_overlap_lesson_schedules
 
   before_validation :set_end_at
+  before_destroy :do_not_destroy_if_booking_present
 
   scope :default_order, -> { order(:start_at) }
   scope :bookable, -> { where(is_booked: false).where('start_at > ?', Time.current) }
@@ -36,6 +37,13 @@ class LessonSchedule < ApplicationRecord
   def validate_no_overlap_lesson_schedules
     if lesson.instructor.lesson_schedules.where.not(id:).exists?(['start_at < ? AND end_at > ?', end_at, start_at])
       errors.add(:base, '他のレッスンと重複しています')
+    end
+  end
+
+  def do_not_destroy_if_booking_present
+    if is_booked?
+      errors.add(:is_booked, '予約が存在するため削除できません')
+      throw(:abort)
     end
   end
 end
