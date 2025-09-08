@@ -49,7 +49,7 @@ class LessonSchedule < ApplicationRecord
   end
 
   def do_not_update_start_at_if_booking_present
-    if is_booked?
+    if is_booked? && start_at_changed?
       errors.add(:base, '予約が存在するため、開始時刻の変更はできません。ユーザーと直接やりとりをしてください。')
       throw(:abort)
     end
