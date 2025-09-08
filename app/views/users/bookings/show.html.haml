@@ -1,0 +1,23 @@
+%h1.fs-2.mb-4 予約詳細
+.row.justify-content-center
+  .col-8
+    %dl.row
+      %dt.col-2 レッスン名
+      %dd.col-10= @booking.lesson_schedule.lesson.name
+
+      %dt.col-2 言語
+      %dd.col-10= @booking.lesson_schedule.lesson.language_text
+
+      %dt.col-2 レッスン詳細
+      %dd.col-10= @booking.lesson_schedule.lesson.description
+
+      %dt.col-2 開始日時
+      %dd.col-10= l(@booking.lesson_schedule.start_at)
+
+      %dt.col-2 終了日時
+      %dd.col-10= l(@booking.lesson_schedule.end_at)
+
+      %dt.col-2 ミーティングURL
+      %dd.col-10= @booking.lesson_schedule.meeting_url
+
+    = button_to '予約をキャンセルする', users_booking_path(@booking), method: :delete, data: { turbo_confirm: '本当にキャンセルしますか？' }, class: 'btn btn-outline-danger mt-3'

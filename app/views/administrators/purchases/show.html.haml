@@ -15,6 +15,14 @@
       %dd.col-9
         - if @purchase.paid?
           = l(@purchase.created_at)
+          %span.bg-success.text-white.p-1.rounded 支払い済
+        - else
+          %span.bg-secondary.text-white.p-1.rounded 未払い
 
       %dt.col-3 合計金額
       %dd.col-9= number_to_currency(@purchase.total_amount)
+
+    = button_to '支払いステータスを更新する', administrators_purchase_path(@purchase),
+                                          method: :put, data: { turbo_confirm: '支払いステータスを更新しますか？' },
+                                          disabled: @purchase.paid?,
+                                          class: 'btn btn-outline-danger mt-3'

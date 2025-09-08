@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_09_02_225737) do
+ActiveRecord::Schema[8.0].define(version: 2025_09_05_034045) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -26,6 +26,17 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_02_225737) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_administrators_on_email", unique: true
+  end
+
+  create_table "bookings", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "lesson_schedule_id", null: false
+    t.bigint "lesson_ticket_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["lesson_schedule_id"], name: "index_bookings_on_lesson_schedule_id"
+    t.index ["lesson_ticket_id"], name: "index_bookings_on_lesson_ticket_id"
+    t.index ["user_id", "lesson_schedule_id"], name: "index_bookings_on_user_id_and_lesson_schedule_id", unique: true
   end
 
   create_table "instructors", force: :cascade do |t|
@@ -118,6 +129,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_09_02_225737) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "bookings", "lesson_schedules"
+  add_foreign_key "bookings", "lesson_tickets"
+  add_foreign_key "bookings", "users"
   add_foreign_key "lesson_schedules", "lessons"
   add_foreign_key "lesson_tickets", "purchases"
   add_foreign_key "lesson_tickets", "users"

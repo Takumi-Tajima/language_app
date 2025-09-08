@@ -1,0 +1,22 @@
+%h1.fs-2.mb-4 レッスン一覧
+
+= simple_form_for(@q, url: lessons_path, method: :get) do |f|
+  .row.mb-5
+    .col-md-2
+      = f.input :language_eq, collection: Lesson.language.options, include_blank: '全ての言語', label: '言語'
+    .col-md-2
+      = f.input :lesson_schedules_start_at_gteq, as: :datetime, html5: true, label: '開始日時'
+    .col-md-2
+      = f.input :lesson_schedules_end_at_lteq, as: :datetime, html5: true, label: '終了日時'
+    .col-md-2.d-flex.align-items-end
+      = f.button :submit, '検索', class: 'btn-primary mb-3'
+
+.row
+  - @lessons.each do |lesson|
+    .col-md-3.mb-4
+      .card.is-lesson
+        = link_to lesson_path(lesson), class: 'text-decoration-none text-body' do
+          .card-body
+            %h2.card-title.fs-4= lesson.name
+            %p.card-text= truncate(lesson.description, length: 30)
+            .card-text= lesson.language_text

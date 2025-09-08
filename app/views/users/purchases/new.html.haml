@@ -8,3 +8,6 @@
           %h2.fs-4.card-title #{ticket_info[:count]}回チケット
           %p.card-text.fs-3= number_to_currency(ticket_info[:price])
           = button_to '購入する', users_purchases_path, class: 'btn btn-primary', params: { ticket_type: ticket_type }, data: { turbo_confirm: 'このチケットの購入手続きに移ります。よろしいですか？' }
+
+  .mt-5= link_to '所有チケット確認', users_lesson_tickets_path
+  .mt-3= link_to 'チケット購入履歴', users_purchases_path

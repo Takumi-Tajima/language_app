@@ -15,6 +15,9 @@
       %dd.col-9
         - if @purchase.paid?
           = l(@purchase.created_at)
+          %span.bg-success.text-white.p-1.rounded 支払い済
+        - else
+          %span.bg-secondary.text-white.p-1.rounded 未払い
 
       %dt.col-3 合計金額
       %dd.col-9= number_to_currency(@purchase.total_amount)

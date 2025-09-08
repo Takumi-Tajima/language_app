@@ -2,6 +2,7 @@ class Purchase < ApplicationRecord
   extend Enumerize
 
   belongs_to :user
+  has_many :lesson_tickets, dependent: :destroy
 
   enumerize :ticket_type, in: LessonTicket::TICKET_TYPES, predicates: true
 
@@ -9,19 +10,27 @@ class Purchase < ApplicationRecord
   validates :tax_amount, presence: true, numericality: { only_integer: true }
   validates :subtotal, presence: true, numericality: { only_integer: true, greater_than: 0 }
 
+  after_update :create_lesson_ticket_if_changed_from_unpaid_to_paid
+
   scope :default_order, -> { order(created_at: :desc) }
   scope :paid, -> { where.not(paid_at: nil) }
   scope :unpaid, -> { where(paid_at: nil) }
 
   def paid!
-    update!(paid_at: Time.current)
-  end
+    return false if paid?
 
-  def unpaid!
-    update!(paid_at: nil)
+    update!(paid_at: Time.current)
   end
 
   def paid?
     paid_at.present?
+  end
+
+  private
+
+  def create_lesson_ticket_if_changed_from_unpaid_to_paid
+    if saved_change_to_paid_at? && paid?
+      LessonTicket.create!(user: user, purchase: self, ticket_type: ticket_type)
+    end
   end
 end
